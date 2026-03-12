@@ -1,4 +1,4 @@
-package hero.likeherotozero.entity;
+package Hero.likeherotozero.entity;
 
 import jakarta.persistence.*;
 import lombok.*;

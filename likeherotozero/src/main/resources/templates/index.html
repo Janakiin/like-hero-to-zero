@@ -1,17 +1,21 @@
+<!-- src/main/resources/templates/index.html -->
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
     <title>Like Hero To Zero</title>
 </head>
 <body>
-
-<h1>Like Hero To Zero</h1>
-
-<form action="/emission">
-    Country:
-    <input type="text" name="country"/>
-    <button type="submit">Search</button>
+<h1>CO₂ Dashboard</h1>
+<form>
+    <label for="country">Wähle ein Land:</label>
+    <select name="countryId" id="country">
+        <option th:each="country : ${countries}"
+                th:value="${country.id}"
+                th:text="${country.name}">
+        </option>
+    </select>
+    <button type="submit">Anzeigen</button>
 </form>
-
 </body>
 </html>
