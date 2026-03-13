@@ -35,4 +35,15 @@ public class EmissionService {
         Page<Emission> emissions = emissionsRepository.fetchEmissionsByCountryId(countryId, PageRequest.of(0, 100));
         return emissions != null ? emissions : Page.empty();
     }
+
+    public Emission saveEmission(Emission emission) {
+        return emissionsRepository.saveEmission(emission);
+    }
+
+    public Country getCountryById(Long countryId) {
+        return emissionsRepository.fetchCountries().stream()
+                .filter(c -> c.getId().equals(countryId))
+                .findFirst()
+                .orElse(null);
+    }
 }

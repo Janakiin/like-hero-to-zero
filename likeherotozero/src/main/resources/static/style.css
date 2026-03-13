@@ -82,3 +82,12 @@ button:hover {
         padding: 15px;
     }
 }
+
+input {
+    border: 1px solid #006400; /* dünne grüne Linie */
+    border-radius: 5px;        /* abgerundet */
+    padding: 8px 16px;
+    width: 26.5em;
+    display: block;
+    margin-bottom: 16px;
+}

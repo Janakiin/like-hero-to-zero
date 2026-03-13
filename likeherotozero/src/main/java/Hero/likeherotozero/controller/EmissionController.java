@@ -43,4 +43,29 @@ public class EmissionController {
 
         return "emissionsOverview";
     }
+
+    @GetMapping("/emissions/add")
+    public String showAddEmissionForm(Model model) {
+        model.addAttribute("countries", emissionService.getAllCountries());
+        model.addAttribute("emission", new Emission()); // leeres Objekt für Formular
+        return "addEmission";
+    }
+
+    @PostMapping("/emissions/add")
+    public String addEmission(@ModelAttribute Emission emission, Model model) {
+
+        // Country aus DB holen
+        Long countryId = emission.getCountry() != null ? emission.getCountry().getId() : null;
+        if (countryId != null) {
+            Country country = emissionService.getCountryById(countryId); // neue Service-Methode
+            emission.setCountry(country);
+        }
+
+        emissionService.saveEmission(emission);
+
+        if (countryId != null) {
+            return "redirect:/emissions?countryId=" + countryId;
+        }
+        return "redirect:/";
+    }
 }

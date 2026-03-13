@@ -22,4 +22,8 @@ public interface EmissionsRepository extends JpaRepository<Emission, Long> {
     // Emissionen für ein Land
     @Query("SELECT e FROM Emission e WHERE e.country.id = :countryId ORDER BY e.year")
     Page<Emission> fetchEmissionsByCountryId(Long countryId, Pageable pageable);
+
+    default Emission saveEmission(Emission emission) {
+        return save(emission);
+    }
 }

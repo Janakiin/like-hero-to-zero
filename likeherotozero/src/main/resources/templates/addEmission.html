@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Neue Emission hinzufügen</title>
+    <link rel="stylesheet" type="text/css" href="/style.css">
+</head>
+<body>
+
+<h2>Neue Emission hinzufügen</h2>
+
+<form th:action="@{/emissions/add}" th:object="${emission}" method="post">
+
+    <label for="country">Land:</label>
+    <select th:field="*{country.id}" id="country" required>
+        <option th:each="c : ${countries}" th:value="${c.id}" th:text="${c.name}"></option>
+    </select>
+
+    <label for="year">Jahr:</label>
+    <input type="number" th:field="*{year}" id="year" required min="1900" max="2100">
+
+    <label for="value">CO₂ Wert:</label>
+    <input type="number" th:field="*{value}" id="value" step="0.01" required min="0">
+
+    <button type="submit">Hinzufügen</button>
+</form>
+
+</body>
+</html>
