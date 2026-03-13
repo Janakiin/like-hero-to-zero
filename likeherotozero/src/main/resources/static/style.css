@@ -1,0 +1,84 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #eef7ef;
+    margin: 40px;
+}
+
+h2 {
+    color: #1f7a3d;
+}
+
+table {
+    border-collapse: collapse;
+    background-color: white;
+    min-width: 300px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+thead {
+    background-color: #006400;
+    color: white;
+}
+
+th, td {
+    padding: 10px 16px;
+    text-align: left;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f2faf3;
+}
+
+tbody tr:hover {
+    background-color: #dff5e3;
+}
+
+th {
+    font-weight: bold;
+}
+
+.no-data {
+    color: #2e8b57;
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+/* Labels */
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+/* Select-Box */
+select {
+    display: block;
+    width: 24rem;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #006400;
+    border-radius: 5px;
+}
+
+/* Buttons */
+button {
+    background-color: #006400;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    with: 100rem
+}
+
+button:hover {
+    background-color: #004d00;
+}
+
+/* Optional: Responsive für kleine Bildschirme */
+@media (max-width: 500px) {
+    form {
+        width: 90%;
+        padding: 15px;
+    }
+}
