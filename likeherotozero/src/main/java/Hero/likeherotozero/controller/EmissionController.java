@@ -4,6 +4,8 @@ import Hero.likeherotozero.model.Emission;
 import Hero.likeherotozero.model.Country;
 import Hero.likeherotozero.repository.EmissionsRepository;
 import Hero.likeherotozero.service.EmissionService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.domain.Page;
@@ -27,13 +29,16 @@ public class EmissionController {
     }
 
     @GetMapping("/")
-    public String index(Model model) {
+    public String index(Model model, HttpServletRequest request) {
+        request.getSession(false);
+
         model.addAttribute("countries", emissionService.getAllCountries());
         return "index";
     }
 
     @GetMapping("/emissions")
-    public String fetchEmissions(@RequestParam Long countryId, Model model) {
+    public String fetchEmissions(@RequestParam Long countryId, Model model,HttpServletRequest request) {
+        request.getSession(false);
 
         String currentCountry = emissionService.getCountryNameById(countryId);
         Page<Emission> emissionsProCountry = emissionService.getEmissionsByCountryId(countryId);

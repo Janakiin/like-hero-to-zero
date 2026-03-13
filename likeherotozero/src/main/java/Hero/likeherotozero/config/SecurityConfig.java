@@ -24,14 +24,20 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/emissions/add").authenticated() // nur angemeldete User
-                        .anyRequest().permitAll() // alles andere öffentlich
+                        .requestMatchers("/emission/add").authenticated()
+                        .requestMatchers("/emissions/**", "/", "/style.css").permitAll()
                 )
                 .formLogin(form -> form
-                        .loginPage("/login")
+                        .loginPage("/login")                             // eigene Login-Seite
                         .permitAll()
                 )
-                .logout(logout -> logout.permitAll());
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/")
+                        .invalidateHttpSession(true)
+                        .deleteCookies("JSESSIONID")
+                )
+                .csrf(csrf -> csrf.disable());
 
         return http.build();
     }

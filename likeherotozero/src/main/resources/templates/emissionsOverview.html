@@ -6,6 +6,31 @@
 </head>
 
 <body>
+<!-- Navbar -->
+<nav>
+    <a href="/" class="logo"><h2>Like Hero to Zero</h2></a>
+    <div>
+        <!-- Wenn User eingeloggt-->
+        <!-- Statt direkt #authentication.authenticated prüfen -->
+        <form th:action="@{/logout}" method="post"
+              th:if="${#authorization.expression('!isAnonymous()')}">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" th:if="${_csrf != null}"/>
+            <button type="submit" class="green-button">Logout</button>
+        </form>
+
+        <a th:href="@{/login}" th:if="${#authorization.expression('isAnonymous()')}" class="green-button">Login</a>
+    </div>
+</nav>
+
+<div class="container">
+    <div th:if="${#authorization.expression('!isAnonymous()')}" class="admin-container">
+        <h3>
+            <span th:if="${#authentication.authenticated}">
+            Willkommen, <span th:text="${#authentication.name}"></span>!
+            </span>
+        </h3>
+        <button onclick="window.location.href='/emissions/add'" style="height: 36px; width: 106px;">Anzeigen</button>
+    </div>
 
 <h2>CO₂ Emissions</h2>
 
@@ -32,6 +57,6 @@
     </tbody>
 
 </table>
-
+</div>
 </body>
 </html>

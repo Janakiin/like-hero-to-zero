@@ -1,7 +1,7 @@
-body {
+html, body {
     font-family: Arial, sans-serif;
     background-color: #eef7ef;
-    margin: 40px;
+    margin: 0px;
 }
 
 h2 {
@@ -90,4 +90,48 @@ input {
     width: 26.5em;
     display: block;
     margin-bottom: 16px;
+}
+
+/* grüner, abgerundeter Button */
+.green-button {
+    background-color: #006400;
+    color: #ffffff;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none; /* falls Link */
+    font-size: 14px;
+}
+
+.green-button:hover {
+    background-color: #004d00;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    position: sticky;
+    align-items: center;
+    background: darkgreen;
+    padding: 0px 24px;
+
+    a {
+        all: unset;
+        cursor: pointer;
+    }
+    h2 {
+        color: #ffffff;
+    }
+}
+
+.container {
+    margin: 0px 24px;
+}
+
+.admin-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 16px;
 }
