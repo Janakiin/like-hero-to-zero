@@ -41,6 +41,9 @@ public class EmissionController {
     public String fetchEmissions(@RequestParam Long countryId, Model model) {
 
         emissionsProCountry = emissionsRepository.fetchEmissionsByCountryId(countryId,  PageRequest.of(0, 100));
+        if (emissionsProCountry == null) {
+            emissionsProCountry = Page.empty();
+        }
 
         List<Country> countries = emissionsRepository.fetchCountries();
 
