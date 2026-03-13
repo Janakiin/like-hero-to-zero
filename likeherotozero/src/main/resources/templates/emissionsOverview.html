@@ -8,7 +8,13 @@
 
 <h2>CO₂ Emissions</h2>
 
-<table border="1">
+<!-- Wenn KEINE Daten vorhanden -->
+<div th:if="${emissionsPage == null or emissionsPage.content.isEmpty()}">
+    <p>Es gibt leider keine Infos.</p>
+</div>
+
+<!-- Wenn Daten vorhanden -->
+<table border="1"  th:if="${emissionsPage != null and !emissionsPage.content.isEmpty()}">
 
     <thead>
     <tr>
@@ -20,7 +26,7 @@
     <tbody>
     <tr th:each="e : ${emissionsPage.content}">
         <td th:text="${e.year}"></td>
-        <td th:text="${#numbers.formatDecimal(e.value,1,'POINT',2,'NONE')}"></td>
+        <td th:text="${#numbers.formatDecimal(e.value,1,'POINT',1,'POINT')}"></td>
     </tr>
     </tbody>
 
