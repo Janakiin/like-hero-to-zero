@@ -1,4 +1,4 @@
-package Hero.likeherotozero.entity;
+package Hero.likeherotozero.model;
 
 import jakarta.persistence.*;
 import lombok.Data;

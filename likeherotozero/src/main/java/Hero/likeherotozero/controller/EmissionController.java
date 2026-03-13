@@ -1,26 +1,51 @@
-// src/main/java/hero/likeherotozero/controller/EmissionController.java
 package Hero.likeherotozero.controller;
 
-import Hero.likeherotozero.entity.Country;
-import Hero.likeherotozero.repository.CountryRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import Hero.likeherotozero.model.Emission;
+import Hero.likeherotozero.model.Country;
+import Hero.likeherotozero.repository.EmissionsRepository;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Controller
+@Getter
+@Setter
 public class EmissionController {
 
-    @Autowired
-    private CountryRepository countryRepo;
+    private final EmissionsRepository emissionsRepository;
+
+    private Page<Emission> emissionsProCountry; // leer zu Beginn
+
+    public EmissionController(EmissionsRepository emissionsRepository) {
+        this.emissionsRepository = emissionsRepository;
+    }
 
     @GetMapping("/")
-    public String home(Model model) {
-        List<Country> countries = countryRepo.findAll();
-        System.out.println(countries.size());
+    public String index(Model model) {
+
+        List<Country> countries = emissionsRepository.fetchCountries();
+
         model.addAttribute("countries", countries);
-        return "index"; // index.html muss unter templates/
+        model.addAttribute("emissionsProCountry", emissionsProCountry);
+
+        return "index";
+    }
+
+    @GetMapping("/emissions")
+    public String fetchEmissions(@RequestParam Long countryId, Model model) {
+
+        emissionsProCountry = emissionsRepository.fetchEmissionsByCountryId(countryId,  PageRequest.of(0, 100));
+
+        List<Country> countries = emissionsRepository.fetchCountries();
+
+        model.addAttribute("emissionsPage", emissionsProCountry);
+
+        return "emissionsOverview";
     }
 }
