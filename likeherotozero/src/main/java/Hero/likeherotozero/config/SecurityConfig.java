@@ -54,7 +54,6 @@ public class SecurityConfig {
                 AppUser user = new AppUser();
                 user.setUsername("wissenschaftler");
                 user.setPassword(encoder.encode("password"));
-                user.setRole("ROLE_USER");
                 repo.save(user);
             }
         };

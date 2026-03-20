@@ -3,7 +3,9 @@ package Hero.likeherotozero.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "emission", schema = "dbo")
+@Table(name = "emission", schema = "dbo", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"country_id", "year"})
+})
 public class Emission {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

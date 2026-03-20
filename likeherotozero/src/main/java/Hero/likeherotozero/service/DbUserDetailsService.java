@@ -26,7 +26,6 @@ public class DbUserDetailsService implements UserDetailsService {
         return org.springframework.security.core.userdetails.User.builder()
                 .username(User.getUsername())
                 .password(User.getPassword())
-                .roles(User.getRole().replace("ROLE_", "")) // Spring Security erwartet ohne ROLE_ hier
                 .build();
     }
 }
