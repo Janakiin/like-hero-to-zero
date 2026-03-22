@@ -2,30 +2,28 @@ package Hero.likeherotozero.repository;
 
 import Hero.likeherotozero.model.Country;
 import Hero.likeherotozero.model.Emission;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
-public interface EmissionsRepository extends JpaRepository<Emission, Long> {
+public interface CountriesRepository extends JpaRepository<Country, Long> {
 
     // alle Länder
     @Query("SELECT c FROM Country c ORDER BY c.name")
     List<Country> fetchCountries();
 
-    // Emissionen für ein Land
-    @Query("SELECT e FROM Emission e WHERE e.country.id = :countryId ORDER BY e.year")
-    Page<Emission> fetchEmissionsByCountryId(Long countryId, Pageable pageable);
+    @Query("SELECT c FROM Country c WHERE c.isoCode = :isoCode")
+    Optional<Country> findByIsoCode(@Param("isoCode") String isoCode);
+    public interface CountryRepository extends JpaRepository<Country, Long> {
 
-    default Emission saveEmission(Emission emission) {
-        return save(emission);
+        Optional<Country> findByIsoCode(String isoCode);
     }
 
-    boolean existsByCountryAndYear(Country country, int year);
 }

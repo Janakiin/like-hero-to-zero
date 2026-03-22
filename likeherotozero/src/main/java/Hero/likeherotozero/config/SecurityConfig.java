@@ -25,6 +25,7 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/emission/add").authenticated()
+                        .requestMatchers("/import").authenticated()
                         .requestMatchers("/emissions/**", "/", "/style.css").permitAll()
                 )
                 .formLogin(form -> form
