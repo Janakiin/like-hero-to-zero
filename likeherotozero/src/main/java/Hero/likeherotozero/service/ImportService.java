@@ -50,7 +50,7 @@ public class ImportService {
                             return countriesRepository.save(c);
                         });
 
-                if (!emissionsRepository.existsByCountryAndYear(country, year)) {
+                if (!emissionsRepository.existsByCountryIdAndYear(country.getId(), year)) {
                     Emission emission = new Emission();
                     emission.setCountry(country);
                     emission.setYear(year);

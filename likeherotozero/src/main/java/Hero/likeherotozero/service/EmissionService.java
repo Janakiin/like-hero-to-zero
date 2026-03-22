@@ -46,4 +46,8 @@ public class EmissionService {
                 .findFirst()
                 .orElse(null);
     }
+
+    public boolean existsByCountryAndYear(long countryId, int year) {
+        return emissionsRepository.existsByCountryIdAndYear(countryId, year);
+    }
 }

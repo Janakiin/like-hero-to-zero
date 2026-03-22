@@ -135,3 +135,7 @@ nav {
     align-items: center;
     gap: 16px;
 }
+
+.validation-error {
+    padding-top: 18px;
+}

@@ -5,16 +5,18 @@ import Hero.likeherotozero.model.Country;
 import Hero.likeherotozero.repository.EmissionsRepository;
 import Hero.likeherotozero.service.EmissionService;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.Valid;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 
+import java.time.Year;
 import java.util.List;
 
 @Controller
@@ -57,13 +59,46 @@ public class EmissionController {
     }
 
     @PostMapping("/emissions/add")
-    public String addEmission(@ModelAttribute Emission emission, Model model) {
+    public String addEmission(@Valid @ModelAttribute Emission emission, BindingResult bindingResult, Model model) {
+
+        // 👉 dynamische Jahr-Validierung
+        int maxYear = Year.now().getValue() - 1;
+        model.addAttribute("maxYear", maxYear);
+
+        if (emission.getYear() != null && emission.getYear() > maxYear) {
+            bindingResult.rejectValue(
+                    "year",
+                    "error.year",
+                    "Jahr darf nicht größer als " + maxYear + " sein"
+            );
+        }
+
+        if (emission.getValue() == null) {
+            bindingResult.rejectValue("value", "error.value", "Ungültiger Zahlenwert");
+        }
+
+
 
         // Country aus DB holen
         Long countryId = emission.getCountry() != null ? emission.getCountry().getId() : null;
         if (countryId != null) {
             Country country = emissionService.getCountryById(countryId); // neue Service-Methode
             emission.setCountry(country);
+        }
+
+        if (!bindingResult.hasErrors() && countryId != null) {
+            if (emissionService.existsByCountryAndYear(countryId, emission.getYear())) {
+                bindingResult.rejectValue(
+                        "year",
+                        "error.year",
+                        "Für dieses Land existiert bereits ein Eintrag für dieses Jahr"
+                );
+            }
+        }
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("countries", emissionService.getAllCountries());
+            return "addEmission";
         }
 
         emissionService.saveEmission(emission);

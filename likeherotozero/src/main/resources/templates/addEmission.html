@@ -39,12 +39,18 @@
     </select>
 
     <label for="year">Jahr:</label>
-    <input type="number" th:field="*{year}" id="year" required min="1900" max="2100">
+    <input type="number" th:field="*{year}" id="year" required min="1750" th:attr="max=${maxYear}">
 
     <label for="value">CO₂ Wert:</label>
-    <input type="number" th:field="*{value}" id="value" step="0.01" required min="0">
+    <input type="text" th:field="*{value}" id="value" step="0.01" required pattern="[0-9]+([,][0-9]+)?">
+
 
     <button type="submit">Hinzufügen</button>
+    <div class="validation-error" th:if="${#fields.hasErrors('year')}"
+         th:errors="*{year}"></div>
+
+    <div class="validation-error" th:if="${#fields.hasErrors('value')}"
+         th:errors="*{value}"></div>
 </form>
 </div>
 </body>
