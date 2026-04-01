@@ -48,6 +48,7 @@ Die Zugangsdaten können der Tabelle app_users in der Datenbank entnommen werden
 Nach erfolgreicher Konfiguration kann die Applikation gestartet werden.
 
 Anschließend kann sie im Browser zum Beispiel unter http://localhost:8080 aufgerufen und getestet werden.
+Fürs Hinzufügen von neuen Emissionen bitte verwenden Sie das Land "Oz".
 
 ## Hinweise
 
