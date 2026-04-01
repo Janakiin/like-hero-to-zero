@@ -2,6 +2,7 @@ package Hero.likeherotozero.service;
 
 import Hero.likeherotozero.model.Country;
 import Hero.likeherotozero.model.Emission;
+import Hero.likeherotozero.repository.CountriesRepository;
 import Hero.likeherotozero.repository.EmissionsRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -13,13 +14,15 @@ import java.util.List;
 public class EmissionService {
 
     private final EmissionsRepository emissionsRepository;
+    private final CountriesRepository countriesRepository;
 
-    public EmissionService(EmissionsRepository emissionsRepository) {
+    public EmissionService(EmissionsRepository emissionsRepository, CountriesRepository countriesRepository) {
         this.emissionsRepository = emissionsRepository;
+        this.countriesRepository = countriesRepository;
     }
 
     public List<Country> getAllCountries() {
-        List<Country> countries = emissionsRepository.fetchCountries();
+        List<Country> countries = countriesRepository.fetchCountries();
         return countries != null ? countries : List.of();
     }
 
@@ -41,7 +44,7 @@ public class EmissionService {
     }
 
     public Country getCountryById(Long countryId) {
-        return emissionsRepository.fetchCountries().stream()
+        return countriesRepository.fetchCountries().stream()
                 .filter(c -> c.getId().equals(countryId))
                 .findFirst()
                 .orElse(null);

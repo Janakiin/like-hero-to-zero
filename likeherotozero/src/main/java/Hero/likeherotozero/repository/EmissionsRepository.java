@@ -15,11 +15,6 @@ import java.util.List;
 
 @Repository
 public interface EmissionsRepository extends JpaRepository<Emission, Long> {
-
-    // alle Länder
-    @Query("SELECT c FROM Country c ORDER BY c.name")
-    List<Country> fetchCountries();
-
     // Emissionen für ein Land
     @Query("SELECT e FROM Emission e WHERE e.country.id = :countryId ORDER BY e.year")
     Page<Emission> fetchEmissionsByCountryId(Long countryId, Pageable pageable);
