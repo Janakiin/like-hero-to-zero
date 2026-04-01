@@ -34,8 +34,10 @@ spring.jpa.show-sql=true
 spring.jpa.database-platform=org.hibernate.dialect.SQLServerDialect
 ### 4. Datenbank importieren
 
-Die bereitgestellte Datenbank-Datei muss in die konfigurierte Datenbank importiert werden.
+Die bereitgestellte Datenbank-Datei(herotozero.bacpac) muss in die konfigurierte Datenbank importiert werden.
 Diese enthält die notwendigen Tabellen sowie initiale Daten.
+
+Anwendung builden und starten.
 
 ### 5. Anmeldung
 
