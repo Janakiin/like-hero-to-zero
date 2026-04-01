@@ -32,25 +32,27 @@ spring.datasource.password=[Your Server Password]
 spring.jpa.hibernate.ddl-auto=update
 spring.jpa.show-sql=true
 spring.jpa.database-platform=org.hibernate.dialect.SQLServerDialect
+
 ### 4. Datenbank importieren
 
 Die bereitgestellte Datenbank-Datei(herotozero.bacpac) muss in die konfigurierte Datenbank importiert werden.
 Diese enthält die notwendigen Tabellen sowie initiale Daten.
 
-Anwendung builden und starten.
+Anwendung builden.
 
-### 5. Anmeldung
-
-Für den Zugriff auf geschützte Funktionalitäten ist eine Anmeldung erforderlich.
-
-Die Zugangsdaten können der Tabelle app_users in der Datenbank entnommen werden.
-
-### 6. Anwendung starten
+### 5. Anwendung starten
 
 Nach erfolgreicher Konfiguration kann die Applikation gestartet werden.
 
 Anschließend kann sie im Browser zum Beispiel unter http://localhost:8080 aufgerufen und getestet werden.
 Fürs Hinzufügen von neuen Emissionen bitte verwenden Sie das Land "Oz".
+
+### 6. Anmeldung
+
+Für den Zugriff auf geschützte Funktionalitäten ist eine Anmeldung erforderlich.
+
+Die Zugangsdaten können der Tabelle app_users in der Datenbank entnommen werden.
+
 
 ## Hinweise
 
